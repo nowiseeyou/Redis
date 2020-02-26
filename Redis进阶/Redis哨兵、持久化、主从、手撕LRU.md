@@ -1,5 +1,7 @@
 ## Redis哨兵、持久化、主从、手撕LRU ##
 
+    https://juejin.im/post/5dd09f5af265da0be72aacbd
+
 **Redis** 采用的是基于内存的单进程单线程模型的 KV 数据库，由C语言编写，官方提供的数据是可以达到 100000+ 的QPS(每秒的查询次数)。
 
 
