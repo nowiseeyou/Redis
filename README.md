@@ -9,3 +9,7 @@
 ### Redis 常用命令和例程
 
 	http://redisdoc.com/index.html 
+
+## 细节 ##
+
+	redis-cli --raw   // 避免中文乱码
