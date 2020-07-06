@@ -2,7 +2,7 @@
 
 	编辑器 ： Typora 
 
-### 常见问题 以及 解决方案
+### 常见问题 以及 解决方案###
 
 	https://juejin.im/post/5dcaebea518825571f5c4ab0
 
@@ -10,6 +10,10 @@
 
 	http://redisdoc.com/index.html 
 
-## 细节 ##
+### 细节 ###
 
 	redis-cli --raw   // 避免中文乱码
+
+### PHP-Redis 方法 ###
+
+	https://www.jianshu.com/p/68b7114a1d70

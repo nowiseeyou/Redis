@@ -1,6 +1,5 @@
 	https://juejin.im/post/5d8882c8f265da03951a325e
 
-
 ## string ##
 
  **string** 是redis 最基本的类型，可以理解成与 Memcached 一模一样的类型，一个 key对应一个 value。 value其实不仅是 String，也可以是数字，string 类型是二进制安全的。意思是Redis的 string 可以包含任何数据，比如 jpg 图片或序列化的对象。 string 类型是 Redis最基本的数据类型，string类型的值最大能存储 512MB。
