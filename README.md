@@ -17,3 +17,6 @@
 ### PHP-Redis 方法 ###
 
 	https://www.jianshu.com/p/68b7114a1d70
+
+### bitMap 签到
+	https://www.cnblogs.com/liujiduo/p/10396020.html
