@@ -19,4 +19,10 @@
 	https://www.jianshu.com/p/68b7114a1d70
 
 ### bitMap 签到
+
 	https://www.cnblogs.com/liujiduo/p/10396020.html
+
+### 深入剖析 Redis 系列
+
+	https://juejin.im/post/5b76e732f265da4376203849
+
