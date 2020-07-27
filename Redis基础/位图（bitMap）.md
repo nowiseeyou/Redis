@@ -1,4 +1,6 @@
 ## 位图 Redis-BitMap ##
 
+	https://juejin.im/post/5a7dcad0f265da4e6f17d942
+
 **bitMap** 通过一个 bit位来表示某个元素对应的值或者状态，其中的 key 就是对应元素本身。bitmaps 本身不是一种数据结构，实际上 它就是字符串 ( key 对应的 value 就是一串二进制)， 但它可以对字符串的位 进行操作。Bitmaps 单独提供了一套命令，所以在 Redis 中使用 BitMaps 和 使用字符串的方式不太相同。就可以把 bitMaps 想象成一个 以 位为单位的数组，数组的每个单元只能存储  0 和 1 ，数组下标在 bitmaps 中叫做偏移量。
 
