@@ -246,8 +246,8 @@ operation 可以是 AND、 OR 、NOT、XOR 这四种操作中的任意一种：
 	#计算 offset (时间差)
 	
 	$startTime =   strtotime($startDate);
-	$todayTime =   strtotime($todayDate);
-	$offset =  1 +  ( $todayTime - $startTime ) / 86400;
+	$todayTime =   time();
+	$offset =  ceil( ($todayTime - $startTime ) / 86400);
 	
 	echo "今天是第 " . $offset . " 天<br />" ;
 	
