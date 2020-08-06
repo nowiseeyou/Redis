@@ -225,10 +225,10 @@ operation 可以是 AND、 OR 、NOT、XOR 这四种操作中的任意一种：
 ### 案例 ###
 
 #### 场景一 ： 用户签到  ####
-	
+		
 	# 用户 uid
 	
-	$uid = 99;
+	$uid      = 99;
 	$cacheKey = "sign_" . $uid;
 	
 	# 记录有 uid 的key
@@ -237,19 +237,19 @@ operation 可以是 AND、 OR 、NOT、XOR 这四种操作中的任意一种：
 	
 	# 开始有签到功能的日期
 	
-	$startDate = date("Y-m") . "-01";
+	$startDate = date( "Y-m" ) . "-01";
 	
 	# 今天的日期
 	
-	$todayDate = date('Y-m-d');
+	$todayDate = date( 'Y-m-d' );
 	
 	#计算 offset (时间差)
 	
-	$startTime =   strtotime($startDate);
-	$todayTime =   time();
-	$offset =  ceil( ($todayTime - $startTime ) / 86400);
+	$startTime = strtotime( $startDate );
+	$todayTime = time();
+	$offset    = ceil( ( $todayTime - $startTime ) / 86400 );
 	
-	echo "今天是第 " . $offset . " 天<br />" ;
+	echo "今天是第 " . $offset . " 天<br />";
 	
 	# 签到
 	
@@ -257,20 +257,20 @@ operation 可以是 AND、 OR 、NOT、XOR 这四种操作中的任意一种：
 	
 	# 查询签到
 	
-	$signStatus =  $redis->getBit($cacheKey,$offset);
-	if( $signStatus  === 1){
-	    echo  "今天已经签到过了！<br />";
-	}else{
-	    $signRst = $redis->setBit($cacheKey,$offset,1);
-	    if($signRst === 0) exit($todayDate ." 签到成功！<br />") ;
-	    exit("SIGN ERROR");
+	$signStatus = $redis->getBit( $cacheKey, $offset );
+	if ( $signStatus === 1 ) {
+	    exit( "今天已经签到过了！<br />" );
+	} else {
+	    $signRst = $redis->setBit( $cacheKey, $offset, 1 );
+	    if ( $signRst === 0 ) exit( $todayDate . " 签到成功！<br />" );
+	    exit( "SIGN ERROR" );
 	}
-
+	
 	# 统计 签到次数
 	
-	$signCount = $redis->bitCount($cacheKey);
-	echo "总签到天数： " .$signCount . "<br />";
-
-	exit("End...");
+	$signCount = $redis->bitCount( $cacheKey );
+	echo "总签到天数： " . $signCount . "<br />";
 	
-
+	exit( "End..." );
+		
+	
