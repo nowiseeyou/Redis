@@ -259,17 +259,17 @@ operation 可以是 AND、 OR 、NOT、XOR 这四种操作中的任意一种：
 	
 	$signStatus = $redis->getBit( $cacheKey, $offset );
 	if ( $signStatus === 1 ) {
+
+		# 统计 签到次数
+		$signCount = $redis->bitCount( $cacheKey );
+    	echo "总签到天数： " . $signCount . "<br />";
+		
 	    exit( "今天已经签到过了！<br />" );
 	} else {
 	    $signRst = $redis->setBit( $cacheKey, $offset, 1 );
 	    if ( $signRst === 0 ) exit( $todayDate . " 签到成功！<br />" );
 	    exit( "SIGN ERROR" );
 	}
-	
-	# 统计 签到次数
-	
-	$signCount = $redis->bitCount( $cacheKey );
-	echo "总签到天数： " . $signCount . "<br />";
 	
 	exit( "End..." );
 		
