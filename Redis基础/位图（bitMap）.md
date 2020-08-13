@@ -227,7 +227,7 @@ operation 可以是 AND、 OR 、NOT、XOR 这四种操作中的任意一种：
 #### 场景一 ： 用户签到  ####
 		
 	# 用户 uid
-	
+
 	$uid      = 99;
 	$cacheKey = "sign_" . $uid;
 	
@@ -235,7 +235,7 @@ operation 可以是 AND、 OR 、NOT、XOR 这四种操作中的任意一种：
 	
 	# $cacheKey = sprintf("sign_%d" ,$uid);
 	
-	# 开始有签到功能的日期
+	# 每月开始的日期
 	
 	$startDate = date( "Y-m" ) . "-01";
 	
@@ -259,11 +259,11 @@ operation 可以是 AND、 OR 、NOT、XOR 这四种操作中的任意一种：
 	
 	$signStatus = $redis->getBit( $cacheKey, $offset );
 	if ( $signStatus === 1 ) {
-
-		# 统计 签到次数
-		$signCount = $redis->bitCount( $cacheKey );
-    	echo "总签到天数： " . $signCount . "<br />";
-		
+	    # 统计 签到次数
+	
+	    $signCount = $redis->bitCount( $cacheKey );
+	    echo "总签到天数： " . $signCount . "<br />";
+	
 	    exit( "今天已经签到过了！<br />" );
 	} else {
 	    $signRst = $redis->setBit( $cacheKey, $offset, 1 );
@@ -271,6 +271,5 @@ operation 可以是 AND、 OR 、NOT、XOR 这四种操作中的任意一种：
 	    exit( "SIGN ERROR" );
 	}
 	
-	exit( "End..." );
-		
 	
+	exit( "End..." );
