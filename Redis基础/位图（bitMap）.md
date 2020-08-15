@@ -226,10 +226,12 @@ operation 可以是 AND、 OR 、NOT、XOR 这四种操作中的任意一种：
 
 #### 场景一 ： 用户签到  ####
 		
+	
 	# 用户 uid
-
+	
 	$uid      = 99;
 	$cacheKey = "sign_" . $uid;
+	
 	
 	# 记录有 uid 的key
 	
@@ -249,7 +251,32 @@ operation 可以是 AND、 OR 、NOT、XOR 这四种操作中的任意一种：
 	$todayTime = time();
 	$offset    = ceil( ( $todayTime - $startTime ) / 86400 );
 	
-	echo "今天是第 " . $offset . " 天<br />";
+	
+	# 签到图表
+	echo date("Y-m") . "月签到表 :  <br /><br />";
+	
+	for ( $i = $offset - 1; $i > 0; $i-- ) {
+	    $signState = $redis->getBit( $cacheKey, $i );
+	    $isSign    = boolval( $signState ) ? "√" : "×";
+	    echo date( "Y-m" ) . "-" . $i . " 签到状态 ：" . $isSign . "<br />";
+	}
+	
+	echo "<hr >";
+	
+	echo "今天是第 " . $offset . " 天<br /><br />";
+	
+	# 已连续签到
+	
+	$beforeLXCheckInSum = 0;
+	for ( $i = $offset - 1; $i > 0; $i-- ) {
+	    $signState = $redis->getBit( $cacheKey, $i );
+	
+	    if ( intval( $signState ) != 1 ) break;
+	    $beforeLXCheckInSum++;
+	}
+	
+	echo "已连续签到天数(当天未签到) : " . $beforeLXCheckInSum . "<br /><br />";
+	
 	
 	# 签到
 	
@@ -264,12 +291,27 @@ operation 可以是 AND、 OR 、NOT、XOR 这四种操作中的任意一种：
 	    $signCount = $redis->bitCount( $cacheKey );
 	    echo "总签到天数： " . $signCount . "<br />";
 	
-	    exit( "今天已经签到过了！<br />" );
 	} else {
+	
 	    $signRst = $redis->setBit( $cacheKey, $offset, 1 );
-	    if ( $signRst === 0 ) exit( $todayDate . " 签到成功！<br />" );
-	    exit( "SIGN ERROR" );
+	    if ( $signRst != 0 ) exit( "今天已经签到过了！<br />" );
+	
+	    echo $todayDate . " 签到成功！<br />";
 	}
+
+
+	# 计算当月连续签到天数
+	
+	$lXCheckInSum = 0;
+	for ( $i = $offset; $i > 0; $i-- ) {
+	    $signState = $redis->getBit( $cacheKey, $i );
+	
+	    if ( intval( $signState ) != 1 ) break;
+	
+	    $lXCheckInSum++;
+	}
+	
+	exit( "连续签到天数：" . $lXCheckInSum );
 	
 	
 	exit( "End..." );
