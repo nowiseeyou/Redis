@@ -228,7 +228,7 @@ operation 可以是 AND、 OR 、NOT、XOR 这四种操作中的任意一种：
 		
 	
 	# 用户 uid
-	
+
 	$uid      = 99;
 	$cacheKey = "sign_" . $uid;
 	
@@ -253,9 +253,9 @@ operation 可以是 AND、 OR 、NOT、XOR 这四种操作中的任意一种：
 	
 	
 	# 签到图表
-	echo date("Y-m") . "月签到表 :  <br /><br />";
+	echo date( "Y-m" ) . "月签到表 :  <br /><br />";
 	
-	for ( $i = $offset - 1; $i > 0; $i-- ) {
+	for ( $i = 1; $i <= $offset; $i++ ) {
 	    $signState = $redis->getBit( $cacheKey, $i );
 	    $isSign    = boolval( $signState ) ? "√" : "×";
 	    echo date( "Y-m" ) . "-" . $i . " 签到状态 ：" . $isSign . "<br />";
@@ -298,8 +298,8 @@ operation 可以是 AND、 OR 、NOT、XOR 这四种操作中的任意一种：
 	
 	    echo $todayDate . " 签到成功！<br />";
 	}
-
-
+	
+	
 	# 计算当月连续签到天数
 	
 	$lXCheckInSum = 0;
@@ -315,3 +315,4 @@ operation 可以是 AND、 OR 、NOT、XOR 这四种操作中的任意一种：
 	
 	
 	exit( "End..." );
+
